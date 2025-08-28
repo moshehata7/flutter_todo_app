@@ -6,21 +6,28 @@ class ToDoBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 40,),
-        Padding(
-          padding: const EdgeInsets.only(left: 32,bottom: 16),
-          child: Column(
-            children: [
-              Text("MyTasks",style: TextStyle(fontSize: 30),),
-              Text("1 of 3 ",style: TextStyle(fontSize: 15,color: Colors.grey),),
-            ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 32, bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          SizedBox(height: 40),
+          Text("MyTasks", style: TextStyle(fontSize: 30)),
+          Text("1 of 3 ", style: TextStyle(fontSize: 15, color: Colors.grey)),
+          Expanded(
+            child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return TaskItem();
+            },
+                    ),
           ),
-        ),
-        TaskItem()
-      ],
+        
+        ]
+      ),
+      
     );
   }
 }
+
+
