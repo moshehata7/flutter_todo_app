@@ -10,24 +10,33 @@ class ToDoBody extends StatelessWidget {
       padding: const EdgeInsets.only(left: 32, bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
+        children: [
           SizedBox(height: 40),
-          Text("MyTasks", style: TextStyle(fontSize: 30)),
-          Text("1 of 3 ", style: TextStyle(fontSize: 15, color: Colors.grey)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.circle_outlined),
+                  Text("MyTasks", style: TextStyle(fontSize: 30)),
+                ],
+              ),
+              Text(
+                "1 of 3 ",
+                style: TextStyle(fontSize: 15, color: Colors.grey),
+              ),
+            ],
+          ),
           Expanded(
             child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return TaskItem();
-            },
-                    ),
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return TaskItem();
+              },
+            ),
           ),
-        
-        ]
+        ],
       ),
-      
     );
   }
 }
-
-
