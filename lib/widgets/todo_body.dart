@@ -12,21 +12,21 @@ class ToDoBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 40),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
-              Row(
-                children: [
-                  Icon(Icons.circle_outlined),
-                  Text("MyTasks", style: TextStyle(fontSize: 30)),
-                ],
-              ),
+              Icon(Icons.circle_outlined,size: 30,),
+              
+            SizedBox(width: 15,),
+          
+          Column(
+            children: [
+              Text("MyTasks", style: TextStyle(fontSize: 30)),
               Text(
                 "1 of 3 ",
                 style: TextStyle(fontSize: 15, color: Colors.grey),
               ),
             ],
-          ),
+          ),]),
           Expanded(
             child: ListView.builder(
               itemCount: 2,

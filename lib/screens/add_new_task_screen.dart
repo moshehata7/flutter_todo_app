@@ -10,7 +10,9 @@ class AddNewTaskScreen extends StatelessWidget {
       appBar:AppBar(
       
       ),
-      body: NewTaskBody(titleOfScreen: "Add New Task",),
+      body: NewTaskBody(
+        buttonName: "Add Task",
+        titleOfScreen: "Add New Task",),
     );
   }
 }

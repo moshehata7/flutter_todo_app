@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/widgets/custom_button.dart';
 
 class NewTaskBody extends StatefulWidget {
-  const NewTaskBody({super.key, required this.titleOfScreen});
+  const NewTaskBody({super.key, required this.titleOfScreen, required this.buttonName});
   final String titleOfScreen;
+  final String buttonName;
 
   @override
   State<NewTaskBody> createState() => _NewTaskBodyState();
@@ -104,6 +106,9 @@ class _NewTaskBodyState extends State<NewTaskBody> {
               ),
             ),
           ),
+          SizedBox(height: 30,),
+          CustomButton(buttonName: widget.buttonName,)
+          
         ],
       ),
     );

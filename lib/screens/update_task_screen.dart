@@ -10,7 +10,9 @@ class UpdateTaskScreen extends StatelessWidget {
       appBar:AppBar(
       
       ),
-      body: NewTaskBody(titleOfScreen: "Update Task",),
+      body: NewTaskBody(
+        buttonName: "Update Task",
+        titleOfScreen: "Update Task",),
     ); ;
   }
 }
