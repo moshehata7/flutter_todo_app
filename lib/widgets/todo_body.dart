@@ -29,7 +29,7 @@ class ToDoBody extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: 2,
               itemBuilder: (context, index) {
                 return TaskItem();
               },

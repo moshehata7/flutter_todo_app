@@ -22,7 +22,19 @@ class HomeScreen extends StatelessWidget {
           );
         },
       ),
-      drawer: Drawer(surfaceTintColor: Colors.white),
+      drawer: Drawer(
+        child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end:Alignment.bottomRight ,
+            colors: [
+              
+            Colors.deepPurple,
+            Colors.white,
+          ])
+        ),
+      ),),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         bottom: PreferredSize(
