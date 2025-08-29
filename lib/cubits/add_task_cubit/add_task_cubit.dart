@@ -10,8 +10,8 @@ class AddTaskCubit extends Cubit<AddTaskState> {
   Future<void> addTask(TaskModel task) async {
     emit(AddTaskLoading());
     try {
-      var taskBox = Hive.box<TaskModel>("task box");
-      await taskBox.add(task);
+      var tasksBox = Hive.box<TaskModel>("tasks box");
+      await tasksBox.add(task);
       emit(AddTaskSuccess());
     } catch (e) {
       emit(AddTaskFailure(e.toString()));

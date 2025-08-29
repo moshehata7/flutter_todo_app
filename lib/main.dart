@@ -7,7 +7,7 @@ import 'package:todo_app/screens/home_screen.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
-  await Hive.openBox<TaskModel>("task box");
+  await Hive.openBox<TaskModel>("tasks box");
   runApp(ToDoApp());
 }
 
