@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/widgets/new_task_body.dart';
+import 'package:todo_app/widgets/add_new_task_body.dart';
 
 class AddNewTaskScreen extends StatelessWidget {
   const AddNewTaskScreen({super.key});
@@ -10,9 +10,7 @@ class AddNewTaskScreen extends StatelessWidget {
       appBar:AppBar(
       
       ),
-      body: NewTaskBody(
-        buttonName: "Add Task",
-        titleOfScreen: "Add New Task",),
+      body: AddNewTaskBody(),
     );
   }
 }

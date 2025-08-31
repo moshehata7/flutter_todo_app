@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:todo_app/cubits/fetch_tasks_cubit/fetch_tasks_cubit.dart';
+import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/screens/update_task_screen.dart';
 
 class TaskItem extends StatefulWidget {
-  const TaskItem({super.key});
+  const TaskItem({super.key, required this.task});
+  final TaskModel task;
 
   @override
   State<TaskItem> createState() => _TaskItemState();
 }
 
 class _TaskItemState extends State<TaskItem> {
-  bool isPressed =false;
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
+    final date = DateTime.parse(widget.task.date);
+    final formattedDate = DateFormat('EEEE, MMM d').format(date);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -20,13 +28,13 @@ class _TaskItemState extends State<TaskItem> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return UpdateTaskScreen();
+                return UpdateTaskScreen(task: widget.task);
               },
             ),
           );
         },
         child: Container(
-          height: 100,
+          height: 115,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
@@ -42,29 +50,53 @@ class _TaskItemState extends State<TaskItem> {
           child: Column(
             children: [
               ListTile(
-                leading: IconButton(onPressed: (){
-                  setState(() {
-                    isPressed =!isPressed;
-                  });
-                },
-                
-                 icon:isPressed ==true ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank) ,
-                 
-                
+                leading: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isPressed = !isPressed;
+                    });
+                  },
+
+                  icon: isPressed == true
+                      ? Icon(Icons.check_box)
+                      : Icon(Icons.check_box_outline_blank),
                 ),
-                title: Text(
-                  "title",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                title: isPressed == true
+                    ? Text(
+                      maxLines: 1,
+                        widget.task.title,
+                        style: TextStyle(
+                          decorationThickness: 2,
+                          decoration: TextDecoration.lineThrough,
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : Text(
+                        widget.task.title,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                 subtitle: Text(
-                  "content",
+                  maxLines: 2,
+                  widget.task.note,
                   style: TextStyle(fontSize: 12, color: Colors.black),
                 ),
+                trailing: IconButton(
+                          onPressed: () {
+                            widget.task.delete();
+                            BlocProvider.of<FetchTasksCubit>(
+                              context,
+                            ).fetchAllTasks();
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
               ),
+              
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: Row(
@@ -72,12 +104,13 @@ class _TaskItemState extends State<TaskItem> {
                   children: [
                     Column(
                       children: [
+                        
                         Text(
-                          "11:55 PM",
+                          widget.task.time,
                           style: TextStyle(color: Colors.grey, fontSize: 10),
                         ),
                         Text(
-                          " fri 6 ,oct, 2025 ",
+                          formattedDate,
                           style: TextStyle(color: Colors.grey, fontSize: 10),
                         ),
                       ],

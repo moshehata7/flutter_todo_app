@@ -7,11 +7,17 @@ part 'fetch_tasks_state.dart';
 
 class FetchTasksCubit extends Cubit<FetchTasksState> {
   FetchTasksCubit() : super(FetchTasksInitial());
-   fetchAllTasks(){
+  List<TaskModel> tasksList = [];
+  fetchAllTasks() {
+    var tasksBox = Hive.box<TaskModel>("tasks box");
+    tasksList = tasksBox.values.toList();
+    emit(FetchTasksSuccess(tasksList,isCleared: false));
+  }
 
-      var tasksBox = Hive.box<TaskModel>("tasks box");
-     List<TaskModel> tasksList= tasksBox.values.toList();
-      emit(FetchTasksSuccess(tasksList));
-    
+  deleteAllTasks() {
+    var tasksBox = Hive.box<TaskModel>("tasks box");
+  tasksBox.clear();
+   tasksList.clear();  
+    emit(FetchTasksSuccess(tasksList,isCleared: true));
   }
 }
