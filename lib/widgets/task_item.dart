@@ -14,7 +14,7 @@ class TaskItem extends StatefulWidget {
 }
 
 class _TaskItemState extends State<TaskItem> {
-  bool isPressed = true;
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     final date = DateTime.parse(widget.task.date);

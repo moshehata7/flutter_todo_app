@@ -38,7 +38,7 @@ class _AddNewTaskBodyState extends State<AddNewTaskBody> {
                 if (value?.isEmpty ?? true) {
                   return "filled is required";
                 } else {
-                  null;
+                  return null;
                 }
               },
               onSaved: (value) {
