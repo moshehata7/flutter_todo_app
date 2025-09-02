@@ -14,11 +14,11 @@ class TaskItem extends StatefulWidget {
 }
 
 class _TaskItemState extends State<TaskItem> {
-  bool isPressed = false;
+  bool isPressed = true;
   @override
   Widget build(BuildContext context) {
     final date = DateTime.parse(widget.task.date);
-    final formattedDate = DateFormat('EEEE, MMM d').format(date);
+    final formattedDate = DateFormat('EEEE, MMM d, yyyy').format(date);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -50,20 +50,17 @@ class _TaskItemState extends State<TaskItem> {
           child: Column(
             children: [
               ListTile(
-                leading: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isPressed = !isPressed;
-                    });
+                leading: Checkbox(
+                  value: isPressed,
+                  onChanged: (value) {
+                  setState(() {
+                      isPressed = value!;
+                  });
                   },
-
-                  icon: isPressed == true
-                      ? Icon(Icons.check_box)
-                      : Icon(Icons.check_box_outline_blank),
                 ),
                 title: isPressed == true
                     ? Text(
-                      maxLines: 1,
+                        maxLines: 1,
                         widget.task.title,
                         style: TextStyle(
                           decorationThickness: 2,
@@ -87,16 +84,14 @@ class _TaskItemState extends State<TaskItem> {
                   style: TextStyle(fontSize: 12, color: Colors.black),
                 ),
                 trailing: IconButton(
-                          onPressed: () {
-                            widget.task.delete();
-                            BlocProvider.of<FetchTasksCubit>(
-                              context,
-                            ).fetchAllTasks();
-                          },
-                          icon: Icon(Icons.delete),
-                        ),
+                  onPressed: () {
+                    widget.task.delete();
+                    BlocProvider.of<FetchTasksCubit>(context).fetchAllTasks();
+                  },
+                  icon: Icon(Icons.delete),
+                ),
               ),
-              
+
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: Row(
@@ -104,7 +99,6 @@ class _TaskItemState extends State<TaskItem> {
                   children: [
                     Column(
                       children: [
-                        
                         Text(
                           widget.task.time,
                           style: TextStyle(color: Colors.grey, fontSize: 10),

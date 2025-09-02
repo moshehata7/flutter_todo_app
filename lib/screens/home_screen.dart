@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/cubits/fetch_tasks_cubit/fetch_tasks_cubit.dart';
-import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/screens/add_new_task_screen.dart';
 import 'package:todo_app/widgets/task_item.dart';
 
@@ -35,17 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         },
-      ),
-      drawer: Drawer(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.purple, Colors.white],
-            ),
-          ),
-        ),
       ),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
@@ -85,28 +73,15 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40),
+            
             Row(
               children: [
-                CircularProgressIndicator(
-                  value: 1 / 3,
-                  backgroundColor: Colors.grey,
-                  valueColor: AlwaysStoppedAnimation(Colors.purple),
-                ),
-
-                SizedBox(width: 15),
-
-                Column(
-                  children: [
-                    Text("MyTasks", style: TextStyle(fontSize: 30)),
-                    Text(
-                      "1 of 3",
-                      style: TextStyle(fontSize: 15, color: Colors.grey),
-                    ),
-                  ],
-                ),
+                Icon(Icons.circle_outlined,color: Colors.purple,),
+                Text(" MyTasks", style: TextStyle(fontSize: 30)),
               ],
             ),
-
+            Divider(),
+            
             BlocBuilder<FetchTasksCubit, FetchTasksState>(
               builder: (context, state) {
                 if (state is FetchTasksSuccess) {
